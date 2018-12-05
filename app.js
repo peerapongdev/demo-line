@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-// Add env
-require('dotenv').config();
+// // Add env
+// require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
