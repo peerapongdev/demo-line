@@ -1,4 +1,4 @@
-const axios = require('axios');
+const request = require('request');
 
 class sendLine {
 
@@ -14,18 +14,13 @@ class sendLine {
             messages: msgArray
         })
 
-        axios({
+        request.post({
             url: 'https://api.line.me/v2/bot/message/reply',
-            method: 'post',
             headers: headers,
-            data: body
-         })
-         .then(response => {
-            console.log(response)
-         }) 
-         .catch(err => {
-            console.log('error');
-         });
+            body: body
+        }, (err, res, body) => {
+            console.log('status = ' + res.statusCode);
+        });
     }
 
     messageNews() {
