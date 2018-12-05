@@ -1,9 +1,9 @@
 const mainController = require('../controller/mainController');
 
 
-module.exports = function(server, prefixUrl){
+module.exports = function(app){
 
-    server.get('/', mainController.debug);
-    server.post('/webhook', mainController.main);
+    app.get('/', mainController.debug);
+    app.post('/webhook', mainController.main);
 
 };
