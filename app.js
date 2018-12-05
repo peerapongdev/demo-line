@@ -15,7 +15,6 @@ app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-    let msgRaw = [];
     // aimlParser.getResult('Hello', (answer, wildCardArray, input) => {
     //     reply(reply_token, input + "-------->" + answer)
     // })
@@ -442,7 +441,7 @@ app.post('/webhook', (req, res) => {
 
     msgRaw = [{
         type: 'text',
-        text: msgRaw
+        text: 'textttt'
     }];
 
     reply(reply_token, msgRaw)
