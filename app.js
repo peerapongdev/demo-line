@@ -23,7 +23,7 @@ app.post('/webhook', (req, res) => {
     if (msg == "news") {
         body.push(messageNews());
     } else {
-        body.push(messageText(msg));
+        body.push(messageNews());
     }
 
     reply(reply_token, body)
