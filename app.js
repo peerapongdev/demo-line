@@ -1,5 +1,5 @@
 // Reply with two static messages
-
+const token = "SXacpAKQELBJCyS7RfhIpXs0Wd6wgk1plVX5ox1OKMywptsjpzp+uCusljlwn7A9F8b/kxXcmHoTIx7bsJuo4+oLarFGBKmyhF6aHmW1B5ng4Y6sLrpJWi/RI8cv3msPEFRoxx6i9CZBBRFRK6NRUgdB04t89/1O/w1cDnyilFU=";
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -16,7 +16,7 @@ app.listen(port)
 function reply(reply_token) {
     let headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer g/tS/2/Weyq6GG32mMoJ6kPC6EnRD0f0ouo8NeGxtKFNOYiEyBSXDJ2K2uVjQfW+F8b/kxXcmHoTIx7bsJuo4+oLarFGBKmyhF6aHmW1B5lUgADVQgx4pzAnYSScz+cz3ThBWPM8aUjGTCMu7CpCsAdB04t89/1O/w1cDnyilFU='
+        'Authorization': `Bearer ${token}`
     }
     let body = JSON.stringify({
         replyToken: reply_token,
