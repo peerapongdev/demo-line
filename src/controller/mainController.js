@@ -3,8 +3,8 @@ const serviceLine = new sendLine();
 
 
 exports.main = async function (req, res) {
-    let reply_token = req.body.events[0].replyToken;
-    let msg = req.body.events[0].message.text;
+    let reply_token = req.body.events[0].replyToken || 0;
+    let msg = req.body.events[0].message.text || '';
     let body = [];
 
     if (msg == "news") {
