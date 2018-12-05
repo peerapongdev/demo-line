@@ -3,10 +3,10 @@ const request = require('request');
 class sendLine {
 
     replyLine(reply_token, msgArray) {
-
+        let token = process.env.LINE_TOKEN_CHANNEL || "SYvxcKZpk0KkZJjiecJeO2Rsv/JXQk2tXxTYEr/FM+sy92kre+GfEkDPVvMMJy2uF8b/kxXcmHoTIx7bsJuo4+oLarFGBKmyhF6aHmW1B5mpeF1hfCwPcOlXUVPIHu50Bg+wYMYQSreH7nFd2CapZwdB04t89/1O/w1cDnyilFU=";
         let headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.LINE_TOKEN_CHANNEL}`
+            'Authorization': `Bearer ${token}`
         };
     
         let body = JSON.stringify({
