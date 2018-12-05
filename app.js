@@ -58,7 +58,7 @@ function messageNews() {
 
     const msg = {
         "type": "flex",
-        "altText": "Flex Message",
+        "altText": "Hot News!",
         "contents": {
           "type": "carousel",
           "contents": [
