@@ -7,12 +7,14 @@ class sendLine {
         let headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${process.env.LINE_TOKEN_CHANNEL}`
-        }
+        };
     
         let body = JSON.stringify({
             replyToken: reply_token,
             messages: msgArray
-        })
+        });
+
+        console.log(body);
 
         request.post({
             url: 'https://api.line.me/v2/bot/message/reply',
@@ -20,7 +22,12 @@ class sendLine {
             body: body
         }, (err, res, body) => {
             console.log('status = ' + res.statusCode);
+            if (res.statusCode == 200) {
+                return true;
+            }
         });
+
+        return false;
     }
 
     messageNews() {
