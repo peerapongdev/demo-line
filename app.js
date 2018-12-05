@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
     let msg = req.body.events[0].message.text
-    let body;
+    let body = [];
     // aimlParser.getResult('Hello', (answer, wildCardArray, input) => {
     //     reply(reply_token, input + "-------->" + answer)
     // })
@@ -23,7 +23,7 @@ app.post('/webhook', (req, res) => {
     if (msg == "news") {
         body.push(messageNews());
     } else {
-        body.push(messageNews());
+        body.push(messageText(msg));
     }
 
     reply(reply_token, body)
@@ -32,7 +32,7 @@ app.post('/webhook', (req, res) => {
 
 app.listen(port)
 
-function reply(reply_token, msg) {
+function reply(reply_token, msgArray) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer SYvxcKZpk0KkZJjiecJeO2Rsv/JXQk2tXxTYEr/FM+sy92kre+GfEkDPVvMMJy2uF8b/kxXcmHoTIx7bsJuo4+oLarFGBKmyhF6aHmW1B5mpeF1hfCwPcOlXUVPIHu50Bg+wYMYQSreH7nFd2CapZwdB04t89/1O/w1cDnyilFU='
@@ -40,7 +40,7 @@ function reply(reply_token, msg) {
 
     let body = JSON.stringify({
         replyToken: reply_token,
-        messages: msg
+        messages: msgArray
     })
 
     request.post({
@@ -471,10 +471,10 @@ function messageNews() {
     return msg;
 }
 
-function messageText() {
+function messageText(message) {
     const msg = {
         type: 'text',
-        text: msg
+        text: message
     };
 
     return msg;
