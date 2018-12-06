@@ -72,6 +72,8 @@ const request = require('request');
 const sendLine = require('./src/constant/sendLine');
 const serviceLine = new sendLine();
 
+const dataTns = require('./src/constant/dataTns');
+const serviceTns = new dataTns();
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -80,20 +82,44 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// app.get('/', async (req, res) => {
+//   // const dataTodayTopPick = await serviceTns.getTodayTopPick();
+//   // dataTodayTopPick.forEach(ele => {
+//   //   console.log(ele)
+//   // });
+//   // // console.log(dataTodayTopPick);
+//   // // res.sendStatus(200);
+//   // res.json({
+//   //   data: dataTodayTopPick
+//   // });
+
+//   let reply_token = "1";
+//   let msg = "news";
+//   let body = [];
+
+//   if (msg == "news") {
+//     body.push(serviceLine.messageNews());
+//   } else {
+//     body.push(serviceLine.messageText(msg));
+//   }
+
+//   serviceLine.replyLine(reply_token, body);
+//   res.sendStatus(200);
+// });
+
 app.post('/webhook', (req, res) => {
-    let reply_token = req.body.events[0].replyToken;
-    let msg = req.body.events[0].message.text;
-    let body = [];
+  let reply_token = req.body.events[0].replyToken;
+  let msg = req.body.events[0].message.text;
+  let body = [];
 
+  if (msg == "news") {
+    body.push(serviceLine.messageNews());
+  } else {
+    body.push(serviceLine.messageText(msg));
+  }
 
-    if (msg == "news") {
-        body.push(serviceLine.messageNews());
-    } else {
-        body.push(serviceLine.messageText(msg));
-    }
-
-    serviceLine.replyLine(reply_token, body);
-    res.sendStatus(200)
-})
+  serviceLine.replyLine(reply_token, body);
+  res.sendStatus(200);
+});
 
 app.listen(port);
