@@ -92,7 +92,7 @@ app.post('/webhook', (req, res) => {
         body.push(serviceLine.messageText(msg));
     }
 
-    serviceLine.reply(reply_token, body);
+    serviceLine.replyLine(reply_token, body);
     res.sendStatus(200)
 })
 
