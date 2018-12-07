@@ -3,7 +3,7 @@ const request = require('request');
 class sendLine {
 
   replyLine(reply_token, msgArray) {
-      let token = process.env.LINE_TOKEN_CHANNEL || "SYvxcKZpk0KkZJjiecJeO2Rsv/JXQk2tXxTYEr/FM+sy92kre+GfEkDPVvMMJy2uF8b/kxXcmHoTIx7bsJuo4+oLarFGBKmyhF6aHmW1B5mpeF1hfCwPcOlXUVPIHu50Bg+wYMYQSreH7nFd2CapZwdB04t89/1O/w1cDnyilFU=";
+      let token = process.env.LINE_TOKEN_CHANNEL || "y5WNgCQMa4wONZrtwr6D5oACnBP6xwM849tClK24iFk60XJQQ0rJX5q668d2BZ7YRoWXzCaBi8Z8nX4tNU0K6oUYlX0IX14Csl8+D5yyeiv/Bd/G83Wb9BvVLx+E/oJdR8IDIZXIFxxzcVeQU59tuwdB04t89/1O/w1cDnyilFU=";
       let headers = {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + token
