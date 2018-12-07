@@ -30,8 +30,8 @@ class sendLine {
       return false;
   }
 
-  messageNews() {
-    const content = this.addMessageInNews();
+  messageNews(detailsArray) {
+    const content = this.detailMessageInNews(detailsArray);
     let msg = {
         "type": "flex",
         "altText": "Hot News!",
@@ -41,12 +41,10 @@ class sendLine {
         }
     };
 
-    console.log(msg)
-
     return msg;
   }
 
-  addMessageInNews() {
+  detailMessageInNews(detailsArray) {
     let content = [];
     let contentJsonNews = {
         "type": "bubble",
@@ -165,95 +163,10 @@ class sendLine {
         }
     };
 
-    let contentJson = {
-        "type": "bubble",
-        "hero": {
-            "type": "image",
-            "url": "https://www.isranews.org/images/2017/isranews/05/010617_ptt.jpg",
-            "align": "center",
-            "size": "full",
-            "aspectRatio": "20:13",
-            "aspectMode": "cover"
-        },
-        "body": {
-            "type": "box",
-            "layout": "vertical",
-            "spacing": "md",
-            "action": {
-            "type": "uri",
-            "label": "Action",
-            "uri": "https://linecorp.com"
-            },
-            "contents": [
-            {
-                "type": "text",
-                "text": "PTT Stock",
-                "size": "xl",
-                "weight": "bold"
-            },
-            {
-                "type": "box",
-                "layout": "vertical",
-                "spacing": "sm",
-                "contents": [
-                {
-                    "type": "box",
-                    "layout": "baseline",
-                    "contents": [
-                    {
-                        "type": "text",
-                        "text": "Price : $10.5",
-                        "flex": 0,
-                        "margin": "sm",
-                        "weight": "bold"
-                    }
-                    ]
-                }
-                ]
-            },
-            {
-                "type": "box",
-                "layout": "vertical",
-                "contents": [
-                {
-                    "type": "text",
-                    "text": "Description:"
-                },
-                {
-                    "type": "text",
-                    "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    "margin": "lg",
-                    "size": "sm",
-                    "align": "start",
-                    "gravity": "center",
-                    "weight": "regular",
-                    "wrap": true
-                }
-                ]
-            }
-            ]
-        },
-        "footer": {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-            {
-                "type": "spacer",
-                "size": "xxl"
-            },
-            {
-                "type": "button",
-                "action": {
-                "type": "uri",
-                "label": "Interested",
-                "uri": "https://linecorp.com"
-                },
-                "color": "#905C44",
-                "style": "primary"
-            }
-            ]
-        }
-    };
+		detailsArray.map(ele => {
+			let contentJson =	this.contentMessageInNews(ele);
+			content.push(contentJson);
+		});
 
     let contentJsonSeeMore = {
         "type": "bubble",
@@ -277,10 +190,103 @@ class sendLine {
     };
 
     content.push(contentJsonNews);
-    content.push(contentJson);
     content.push(contentJsonSeeMore);
 
     return content;
+  }
+
+  contentMessageInNews(detail) {
+		let contentJson = {
+				"type": "bubble",
+				"hero": {
+						"type": "image",
+						"url": "https://www.isranews.org/images/2017/isranews/05/010617_ptt.jpg",
+						"align": "center",
+						"size": "full",
+						"aspectRatio": "20:13",
+						"aspectMode": "cover"
+				},
+				"body": {
+						"type": "box",
+						"layout": "vertical",
+						"spacing": "md",
+						"action": {
+						"type": "uri",
+						"label": "Action",
+						"uri": "https://linecorp.com"
+						},
+						"contents": [
+						{
+								"type": "text",
+								"text": detail.stock,
+								"size": "xl",
+								"weight": "bold"
+						},
+						{
+								"type": "box",
+								"layout": "vertical",
+								"spacing": "sm",
+								"contents": [
+								{
+										"type": "box",
+										"layout": "baseline",
+										"contents": [
+										{
+												"type": "text",
+												"text": "Price : " + detail.targetPrice,
+												"flex": 0,
+												"margin": "sm",
+												"weight": "bold"
+										}
+										]
+								}
+								]
+						},
+						{
+								"type": "box",
+								"layout": "vertical",
+								"contents": [
+								{
+										"type": "text",
+										"text": "Description:"
+								},
+								{
+										"type": "text",
+										"text": detail.detail,
+										"margin": "lg",
+										"size": "sm",
+										"align": "start",
+										"gravity": "center",
+										"weight": "regular",
+										"wrap": true
+								}
+								]
+						}
+						]
+				},
+				"footer": {
+						"type": "box",
+						"layout": "vertical",
+						"contents": [
+						{
+								"type": "spacer",
+								"size": "xxl"
+						},
+						{
+								"type": "button",
+								"action": {
+								"type": "uri",
+								"label": "Interested",
+								"uri": "https://linecorp.com"
+								},
+								"color": "#905C44",
+								"style": "primary"
+						}
+						]
+				}
+		};
+		
+		return contentJson;
   }
     
   messageText(message) {

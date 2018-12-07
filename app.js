@@ -83,37 +83,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // app.get('/', async (req, res) => {
-//   // const dataTodayTopPick = await serviceTns.getTodayTopPick();
-//   // dataTodayTopPick.forEach(ele => {
-//   //   console.log(ele)
-//   // });
-//   // // console.log(dataTodayTopPick);
-//   // // res.sendStatus(200);
-//   // res.json({
-//   //   data: dataTodayTopPick
-//   // });
 
-//   let reply_token = "1";
-//   let msg = "news";
-//   let body = [];
+//   const dataTodayTopPicks = await serviceTns.getTodayTopPick();
+  
+//   const t = serviceLine.messageNews(dataTodayTopPicks);
+//   // console.log(dataTodayTopPick);
+//   // res.sendStatus(200);
+//   res.json({
+//     data: t
+//   });
 
-//   if (msg == "news") {
-//     body.push(serviceLine.messageNews());
-//   } else {
-//     body.push(serviceLine.messageText(msg));
-//   }
+//   // let reply_token = "1";
+//   // let msg = "news";
+//   // let body = [];
 
-//   serviceLine.replyLine(reply_token, body);
-//   res.sendStatus(200);
+//   // if (msg == "news") {
+//   //   body.push(serviceLine.messageNews());
+//   // } else {
+//   //   body.push(serviceLine.messageText(msg));
+//   // }
+
+//   // serviceLine.replyLine(reply_token, body);
+//   // res.sendStatus(200);
 // });
 
-app.post('/webhook', (req, res) => {
+app.post('/webhook',async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
   let msg = req.body.events[0].message.text;
   let body = [];
 
   if (msg == "news") {
-    body.push(serviceLine.messageNews());
+    const dataTodayTopPicks = await serviceTns.getTodayTopPick();
+    const contentBody = await serviceLine.messageNews(dataTodayTopPicks);
+
+    body.push(contentBody);
   } else {
     body.push(serviceLine.messageText(msg));
   }
