@@ -162,6 +162,7 @@ class sendLine {
             ]
         }
     };
+		content.push(contentJsonNews);
 
 		detailsArray.map(ele => {
 			let contentJson =	this.contentMessageInNews(ele);
@@ -188,8 +189,6 @@ class sendLine {
             ]
         }
     };
-
-    content.push(contentJsonNews);
     content.push(contentJsonSeeMore);
 
     return content;
@@ -233,7 +232,7 @@ class sendLine {
 										"contents": [
 										{
 												"type": "text",
-												"text": "Price : " + detail.targetPrice,
+												"text": "Price : " + detail.targetPrice + "฿",
 												"flex": 0,
 												"margin": "sm",
 												"weight": "bold"
