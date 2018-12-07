@@ -82,30 +82,30 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// app.get('/', async (req, res) => {
+app.get('/', async (req, res) => {
 
-//   const dataTodayTopPicks = await serviceTns.getTodayTopPick();
+  const dataTodayTopPicks = await serviceTns.getTodayTopPick();
   
-//   const t = serviceLine.messageNews(dataTodayTopPicks);
-//   // console.log(dataTodayTopPick);
-//   // res.sendStatus(200);
-//   res.json({
-//     data: t
-//   });
+  const t = serviceLine.messageNews(dataTodayTopPicks);
+  // console.log(dataTodayTopPick);
+  // res.sendStatus(200);
+  res.json({
+    data: t
+  });
 
-//   // let reply_token = "1";
-//   // let msg = "news";
-//   // let body = [];
+  // let reply_token = "1";
+  // let msg = "news";
+  // let body = [];
 
-//   // if (msg == "news") {
-//   //   body.push(serviceLine.messageNews());
-//   // } else {
-//   //   body.push(serviceLine.messageText(msg));
-//   // }
+  // if (msg == "news") {
+  //   body.push(serviceLine.messageNews());
+  // } else {
+  //   body.push(serviceLine.messageText(msg));
+  // }
 
-//   // serviceLine.replyLine(reply_token, body);
-//   // res.sendStatus(200);
-// });
+  // serviceLine.replyLine(reply_token, body);
+  // res.sendStatus(200);
+});
 
 app.post('/webhook',async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
